@@ -127,6 +127,7 @@ class Calculator
     public function undo()
     {
         // TODO implement undo logic here
+        unset($this->intents[count($this->intents) - 1]);
 
         return $this;
     }
@@ -139,6 +140,7 @@ class Calculator
     public function replay()
     {
         // TODO implement replay logic here
+        $this->intents[] = $this->intents[array_key_last($this->intents)];
 
         return $this;
     }
