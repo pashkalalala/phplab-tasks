@@ -37,6 +37,10 @@ function sayHelloArgumentWrapper($arg)
 {
     // put your code here
 
+    if(!is_bool($arg) && !is_string($arg) && !is_numeric($arg)){
+        throw new InvalidArgumentException('$arg is not: number, string or bool');
+    }
+
     return sayHelloArgument($arg);
 }
 
@@ -69,5 +73,12 @@ function countArguments()
  */
 function countArgumentsWrapper()
 {
-    // put your code here
+    $args = func_get_args();
+    foreach($args as $arg){
+        if (!is_string($arg)) {
+            throw new InvalidArgumentException('Parameter is not a string');
+        }
+    }
+
+    return countArguments(...$args);
 }
