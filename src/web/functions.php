@@ -12,6 +12,40 @@
 function getUniqueFirstLetters(array $airports)
 {
     // put your logic here
+    $firstLetters = [];
+    foreach ($airports as $airport) {
+        $firstLetters[] = $airport['name'][0];
+    }
 
-    return ['A', 'B', 'C'];
+    $uniqueFirstLetters = array_unique($firstLetters);
+    sort($uniqueFirstLetters);
+
+    return $uniqueFirstLetters;
+}
+
+function filteringByFirstLetter($airports, $letter)
+{
+    $newArr = [];
+    foreach ($airports as $air) {
+        if ($air['name'][0] === $letter) {
+            $newArr[] = $air;
+        }
+    }
+
+    return $newArr;
+}
+
+function filteringByState($airports, $state)
+{
+    return array_filter($airports, function ($k) use ($state) {
+        return $k['state'] == $state;
+    });
+}
+
+function sortInfoByColumn($airports, $column)
+{
+    $stateColumn = array_column($airports, $column);
+    array_multisort($stateColumn, SORT_ASC, $airports);
+
+    return $airports;
 }
